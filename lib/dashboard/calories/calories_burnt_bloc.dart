@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:steps_repository/calories_repository.dart';
-import 'package:superloop/dashboard/calories/calories_burnt_event.dart';
-import 'package:superloop/dashboard/calories/calories_burnt_state.dart';
+
+import 'calories_burnt_event.dart';
+import 'calories_burnt_state.dart';
 
 class CaloriesBurntBloc extends Bloc<CaloriesBurntEvent, CaloriesBurntState> {
   CaloriesBurntBloc(this._caloriesRepository)

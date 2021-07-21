@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notifications/notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:superloop/dashboard/notification/notification_event.dart';
-import 'package:superloop/dashboard/notification/notification_state.dart';
+
+import 'notification_event.dart';
+import 'notification_state.dart';
 
 class NotificationBloc extends Bloc<ToggleNotifications, NotificationsState> {
   NotificationBloc(this._notificationScheduler, this._sharedPreferences,

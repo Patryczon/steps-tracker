@@ -31,14 +31,12 @@ class BackgroundFetchStepsTracker
           stopOnTerminate: false,
           requiredNetworkType: NetworkType.NONE,
         ), (taskId) async {
-      print("[BackgroundFetch] Event received $taskId");
       var _stepsCount = await _stepsRepository.getStepsCount();
       var _stepsGoal = await _stepsGoalRepository.getStepsGoal();
       if (_stepsCount > (_stepsGoal ?? StepsGoalRepository.defaultStepsCount))
         _notificationScheduler.cancelNextNotification();
       BackgroundFetch.finish(taskId);
     }, (String taskId) async {
-      print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
       BackgroundFetch.finish(taskId);
     });
   }
