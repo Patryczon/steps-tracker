@@ -1,6 +1,5 @@
-# superloop
-
-Recruitment task for SuperLoop
+# Steps-tracker with mocked data
+Simple steps tracker to show my approach to flutter projects 
 
 ## Getting Started
 
