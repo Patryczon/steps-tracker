@@ -1,0 +1,34 @@
+name: superloop
+description: Recruitment task for SuperLoop
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  notifications:
+    path: ./notifications
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^7.0.1
+  get_it: ^7.2.0
+  steps_repository:
+    path: ./steps_repository
+  google_fonts: ^2.1.0
+  percent_indicator: ^3.0.1
+  equatable: ^2.0.3
+  shared_preferences: ^2.0.6
+  modal_bottom_sheet: ^2.0.0
+  background_fetch: ^1.0.1
+  background_work_manager:
+    path: ./background_work_manager
+
+dev_dependencies:
+  very_good_analysis: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/flame.png
+    - assets/images/steps.png

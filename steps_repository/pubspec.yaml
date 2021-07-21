@@ -1,0 +1,19 @@
+name: steps_repository
+description: Repository to provide related to steps data
+version: 0.0.1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get_it: ^7.2.0
+  shared_preferences: ^2.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
