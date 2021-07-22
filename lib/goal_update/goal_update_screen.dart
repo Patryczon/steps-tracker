@@ -9,6 +9,8 @@ import 'package:superloop/goal_update/update/goal_update_bloc.dart';
 import 'update/goal_update_event.dart';
 
 class GoalUpdateScreen extends StatelessWidget {
+  const GoalUpdateScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Container(
         height: MediaQuery.of(context).size.height,

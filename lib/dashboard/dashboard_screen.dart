@@ -21,6 +21,8 @@ import 'package:superloop/widgets/linear_progress.dart';
 import 'package:superloop/widgets/step_indicator.dart';
 
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,

@@ -13,31 +13,29 @@ abstract class BackgroundStepsGoalNotificationTracker {
 
 class BackgroundFetchStepsTracker
     extends BackgroundStepsGoalNotificationTracker {
+  BackgroundFetchStepsTracker(this._stepsGoalRepository, this._stepsRepository,
+      this._notificationScheduler);
+
   final StepsGoalRepository _stepsGoalRepository;
   final StepsRepository _stepsRepository;
   final NotificationScheduler _notificationScheduler;
 
-  BackgroundFetchStepsTracker(this._stepsGoalRepository, this._stepsRepository,
-      this._notificationScheduler);
-
-  BackgroundWorkManager() {}
-
   @override
-  Future startBackgroundWorkManager() async {
-    BackgroundFetch.configure(
-        BackgroundFetchConfig(
-          minimumFetchInterval: Duration(minutes: 30).inMilliseconds,
-          startOnBoot: true,
-          stopOnTerminate: false,
-          requiredNetworkType: NetworkType.NONE,
-        ), (taskId) async {
-      var _stepsCount = await _stepsRepository.getStepsCount();
-      var _stepsGoal = await _stepsGoalRepository.getStepsGoal();
-      if (_stepsCount > (_stepsGoal ?? StepsGoalRepository.defaultStepsCount))
-        _notificationScheduler.cancelNextNotification();
-      BackgroundFetch.finish(taskId);
-    }, (String taskId) async {
-      BackgroundFetch.finish(taskId);
-    });
-  }
+  Future startBackgroundWorkManager() => BackgroundFetch.configure(
+          BackgroundFetchConfig(
+            minimumFetchInterval: const Duration(minutes: 30).inMilliseconds,
+            startOnBoot: true,
+            stopOnTerminate: false,
+            requiredNetworkType: NetworkType.NONE,
+          ), (taskId) async {
+        var _stepsCount = await _stepsRepository.getStepsCount();
+        var _stepsGoal = await _stepsGoalRepository.getStepsGoal();
+        if (_stepsCount >
+            (_stepsGoal ?? StepsGoalRepository.defaultStepsCount)) {
+          await _notificationScheduler.cancelNextNotification();
+        }
+        BackgroundFetch.finish(taskId);
+      }, (String taskId) async {
+        BackgroundFetch.finish(taskId);
+      });
 }

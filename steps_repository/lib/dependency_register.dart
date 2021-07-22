@@ -5,8 +5,9 @@ import 'package:steps_repository/steps_repository.dart';
 
 void registerStepRepositoryDependencies(GetIt injector) {
   var mockedRepository = MockedRepository();
-  injector.registerSingleton<StepsRepository>(mockedRepository);
-  injector.registerSingleton<StepsGoalRepository>(
-      LocalStepsGoalRepository(injector.get()));
-  injector.registerSingleton<CaloriesRepository>(mockedRepository);
+  injector
+    ..registerSingleton<StepsRepository>(mockedRepository)
+    ..registerSingleton<StepsGoalRepository>(
+        LocalStepsGoalRepository(injector.get()))
+    ..registerSingleton<CaloriesRepository>(mockedRepository);
 }

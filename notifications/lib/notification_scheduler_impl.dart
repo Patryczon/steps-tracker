@@ -6,26 +6,26 @@ import 'package:timezone/timezone.dart' as t;
 import 'notification_scheduler.dart';
 
 class NotificationSchedulerImpl extends NotificationScheduler {
+  NotificationSchedulerImpl(this.notificationHour, this.notificationTitle,
+      this.notificationDescription) {
+    var initializationSettingsAndroid =
+        const AndroidInitializationSettings('ic_notification');
+    var initializationSettingsIOS = const IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
   final int notificationHour;
   final String notificationTitle;
   final String notificationDescription;
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  NotificationSchedulerImpl(this.notificationHour, this.notificationTitle,
-      this.notificationDescription) {
-    var initializationSettingsAndroid =
-        new AndroidInitializationSettings('ic_notification');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  }
-
   @override
   Future<void> scheduleDailyNotification() async {
     final timeZone = TimeZone();
-    String timeZoneName = await timeZone.getTimeZoneName();
+    var timeZoneName = await timeZone.getTimeZoneName();
     final location = await timeZone.getLocation(timeZoneName);
     var _now = DateTime.now();
     await _flutterLocalNotificationsPlugin.zonedSchedule(
@@ -37,7 +37,7 @@ class NotificationSchedulerImpl extends NotificationScheduler {
             location),
         const NotificationDetails(
             android: AndroidNotificationDetails(
-                "1", "stepCounter", "Notification for Step Counter")),
+                '1', 'stepCounter', 'Notification for Step Counter')),
         androidAllowWhileIdle: true,
         matchDateTimeComponents: DateTimeComponents.time,
         uiLocalNotificationDateInterpretation:
@@ -48,11 +48,6 @@ class NotificationSchedulerImpl extends NotificationScheduler {
   Future cancelNextNotification() => _flutterLocalNotificationsPlugin
           .pendingNotificationRequests()
           .then((value) {
-        value.forEach((element) {
-          print(element.id);
-          print(element.title);
-          print(element.body);
-        });
         _flutterLocalNotificationsPlugin.cancel(value.first.id);
       });
 

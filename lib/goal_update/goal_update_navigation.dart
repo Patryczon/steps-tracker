@@ -22,7 +22,7 @@ class NavigatorGoalUpdate extends GoalUpdateNavigation {
       enableDrag: false,
       builder: (context) => SingleChildScrollView(
           controller: ModalScrollController.of(context),
-          child: GoalUpdateScreen()),
+          child: const GoalUpdateScreen()),
     );
   }
 }
