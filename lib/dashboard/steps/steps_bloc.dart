@@ -8,10 +8,12 @@ import 'package:superloop/dashboard/steps/steps_state.dart';
 class StepsBloc extends Bloc<StepsEvent, StepsState> {
   StepsBloc(this._stepsRepository, this._stepsGoalRepository)
       : super(StepsDataNotLoaded()) {
-    _stepsRepository.getStepsCountStream().listen((event) {
+    _stepsStreamSubscription =
+        _stepsRepository.getStepsCountStream().listen((event) {
       add(StepsCountChanged(event));
     });
-    _stepsGoalRepository.getStepsGoalStream().listen((event) {
+    _stepsGoalStreamSubscription =
+        _stepsGoalRepository.getStepsGoalStream().listen((event) {
       add(StepsGoalCountChanged(event));
     });
   }
